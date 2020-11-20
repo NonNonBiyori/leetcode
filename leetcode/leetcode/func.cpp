@@ -18,3 +18,54 @@ vector<int> twoSum(vector<int>& nums, int target)
 	}
 	return ret;
 }
+
+ListNode* insertionSortList(ListNode* head)
+{
+	if (head == nullptr || head->next == nullptr)
+	{
+		return head;
+	}
+
+	ListNode* nextList = head->next;
+	head->next = nullptr;
+	while (nextList != nullptr)
+	{
+		if (nextList->val < head->val)
+		{
+			ListNode* tmpList = nextList->next;
+			nextList->next = head;
+			head = nextList;
+			nextList = tmpList;
+		}
+		else
+		{
+			ListNode* saveNext = nextList->next;
+			ListNode* tmpList = head->next;
+			ListNode* lastList = head;
+			bool isEnd = true;
+			while (tmpList != nullptr)
+			{
+				if (nextList->val < tmpList->val)
+				{
+					lastList->next = nextList;
+					nextList->next = tmpList;
+					nextList = saveNext;
+					isEnd = false;
+					break;
+				}
+				lastList = tmpList;
+				tmpList = tmpList->next;
+			}
+			if (isEnd)
+			{
+				lastList->next = nextList;
+				nextList->next = nullptr;
+				nextList = saveNext;
+			}
+
+		}
+	}
+	return head;
+}
+
+
