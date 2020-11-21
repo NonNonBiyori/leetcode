@@ -68,4 +68,71 @@ ListNode* insertionSortList(ListNode* head)
 	return head;
 }
 
+ListNode* mergeList(ListNode* pre, ListNode* post)
+{
+	if (pre == nullptr)
+	{
+		return post;
+	}
+	if (post == nullptr)
+	{
+		return pre;
+	}
+	ListNode* ret = new ListNode(0);
+	ListNode* last = new ListNode(0);
+	last = ret;
+	while (pre != nullptr && post != nullptr)
+	{
+		if (pre->val < post->val)
+		{
+			last->next = pre;
+			last = last->next;
+			pre = pre->next;
+		}
+		else
+		{
+			last->next = post;
+			last = last->next;
+			post = post->next;
+		}
+	}
 
+	if (pre != nullptr)
+	{
+		last->next = pre;
+	}
+
+	if (post != nullptr)
+	{
+		last->next = post;
+	}
+
+	return ret->next;
+}
+
+ListNode* middleNode(ListNode* head)
+{
+	if (head == nullptr)
+	{
+		return head;
+	}
+	ListNode* slow = head;
+	ListNode* fast = head;
+
+	while (fast->next != nullptr)
+	{
+		fast = fast->next;
+		if (fast->next == nullptr)
+		{
+			return slow->next;
+		}
+		fast = fast->next;
+		slow = slow->next;
+	}
+	return slow;
+}
+
+ListNode* sortList(ListNode* head)
+{
+	return nullptr;
+}
