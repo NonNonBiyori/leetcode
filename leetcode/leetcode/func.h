@@ -20,3 +20,6 @@ ListNode* sortList(ListNode* head);
 // 876. 中间节点
 ListNode* middleNode(ListNode* head);
 
+// 242. 有效的字母异位词
+bool isAnagram(string s, string t);
+

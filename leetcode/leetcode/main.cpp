@@ -32,7 +32,8 @@ void test_middleNode()
 int main()
 {
 	// test_insertionSortList();
-	test_middleNode();
+	// test_middleNode();
+	isAnagram("a", "ab");
 	std::cout << "hello " << std::endl;
 	system("pause");
 }

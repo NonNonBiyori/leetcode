@@ -1,6 +1,7 @@
 #include "func.h"
 
 #include <string>
+#include <map>
 
 vector<int> twoSum(vector<int>& nums, int target)
 {
@@ -132,7 +133,81 @@ ListNode* middleNode(ListNode* head)
 	return slow;
 }
 
+ListNode* sortList(ListNode* head, ListNode* tail) {
+	if (head == nullptr) {
+		return head;
+	}
+	if (head->next == tail) {
+		head->next = nullptr;
+		return head;
+	}
+	ListNode* slow = head, *fast = head;
+	while (fast != tail) {
+		slow = slow->next;
+		fast = fast->next;
+		if (fast != tail) {
+			fast = fast->next;
+		}
+	}
+	ListNode* mid = slow;
+	return mergeList(sortList(head, mid), sortList(mid, tail));
+}
+
 ListNode* sortList(ListNode* head)
 {
-	return nullptr;
+	return sortList(head, nullptr);
+}
+
+bool isAnagram(string s, string t)
+{
+	if (s == t)
+	{
+		return true;
+	}
+	if (s.length() != t.length())
+	{
+		return false;
+	}
+	std::map<char, int> sMap;
+	std::map<char, int> tMap;
+	for (int i = 0; i < s.length(); i++)
+	{
+		std::map<char, int>::iterator it;
+		it = sMap.find(s[i]);
+		if (it == sMap.end())
+		{
+			sMap.insert(make_pair(s[i], 1));
+		}
+		else
+		{
+			it->second++;
+		}
+
+		it = tMap.find(t[i]);
+		if (it == tMap.end())
+		{
+			tMap.insert(make_pair(t[i], 1));
+		}
+		else
+		{
+			it->second++;
+		}
+	}
+
+	if (sMap.size() != tMap.size())
+	{
+		return false;
+	}
+	auto itS = sMap.begin();
+	auto itT = tMap.begin();
+	for (; itS != sMap.end(); itS++, itT++)
+	{
+		if (itS->first != itT->first ||
+			itS->second != itT->second)
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
