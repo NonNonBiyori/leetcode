@@ -1,5 +1,6 @@
 #include <iostream>
 #include "func.h"
+#include "niuke.h"
 
 void test_insertionSortList()
 {
@@ -33,7 +34,9 @@ int main()
 {
 	// test_insertionSortList();
 	// test_middleNode();
-	isAnagram("a", "ab");
-	std::cout << "hello " << std::endl;
+	// isAnagram("a", "ab");
+	// sortString("aaaabbbbcccc");
+	string ret = bigNumberAdd("11221239", "456354");
+	std::cout << ret << std::endl;
 	system("pause");
 }

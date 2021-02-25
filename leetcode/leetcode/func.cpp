@@ -2,6 +2,10 @@
 
 #include <string>
 #include <map>
+#include <vector>
+#include <set>
+#include <stack>
+#include <algorithm>
 
 vector<int> twoSum(vector<int>& nums, int target)
 {
@@ -211,3 +215,94 @@ bool isAnagram(string s, string t)
 
 	return true;
 }
+
+double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
+{
+	nums1.insert(nums1.end(), nums2.begin(), nums2.end());
+	sort(nums1.begin(), nums1.end());
+	if (nums1.size() == 0)
+	{
+		return 0;
+	}
+	if (nums1.size() == 1)
+	{
+		return nums1[0];
+	}
+
+	if (nums1.size() % 2 == 1)
+	{
+		return (double)nums1[nums1.size() / 2];
+	}
+	else
+	{
+		return (double)(nums1[nums1.size() / 2] + nums1[nums1.size() / 2 - 1]) / 2;
+	}
+}
+
+string sortString(string s)
+{
+	if (s.length() <= 0)
+		return s;
+	string ret = "";
+	int nCount = 0;
+	while (s.length() > 0)
+	{
+		set<char> tmpSet;
+		tmpSet.clear();
+		for (auto it = s.begin(); it != s.end(); it++)
+		{
+			if (tmpSet.find(*it) == tmpSet.end())
+			{
+				tmpSet.insert(*it);
+				s.erase(it);
+				//it--;
+			}
+		}
+		if (nCount % 2 == 0)
+		{
+			for (auto it = tmpSet.begin(); it != tmpSet.end(); it++)
+			{
+				ret += *it;
+			}
+		}
+		else
+		{
+			stack<char> chSta;
+			for (auto it = tmpSet.begin(); it != tmpSet.end(); it++)
+			{
+				chSta.push(*it);
+			}
+			while (!chSta.empty())
+			{
+				ret += chSta.top();
+				chSta.pop();
+			}
+		}
+		nCount++;
+	}
+	
+	return ret;
+}
+
+string convert(string s, int numRows)
+{
+	if (s.length() <= 1)
+	{
+		return s;
+	}
+
+	int numCol = s.length() / (2 * numRows - 2) + (s.length() % (2 * numRows - 2) - numRows > 0 ?
+		s.length() % (2 * numRows - 2) - numRows : 0);
+	char **arrCh = new char *[numRows];
+	for (int i = 0; i < numRows; i++)
+	{
+		arrCh[i] = new char[numCol];
+	}
+	for (int i = 0; i < s.length(); i++)
+	{
+		for (int j = 0; j < numRows; j++)
+		{
+			
+		}
+	}
+} 
