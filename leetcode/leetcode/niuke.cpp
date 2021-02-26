@@ -1,68 +1,88 @@
 #include "niuke.h"
 
-string bigNumberAdd(string s, string t)
+namespace niuke
 {
-	stack<int> ret;
-	int min = (s.length() > t.length() ? t.length() : s.length());
-	int cal = 0;
-	for (int i = 0; i < min; i++)
+	string bigNumberAdd(string s, string t)
 	{
-		int addValue = s[s.length() - i - 1] - '0' + t[t.length() - i - 1] - '0' + cal;
-		if (addValue >= 10)
+		stack<int> ret;
+		int min = (s.length() > t.length() ? t.length() : s.length());
+		int cal = 0;
+		for (int i = 0; i < min; i++)
 		{
-			cal = addValue / 10;
-			ret.push(addValue % 10);
+			int addValue = s[s.length() - i - 1] - '0' + t[t.length() - i - 1] - '0' + cal;
+			if (addValue >= 10)
+			{
+				cal = addValue / 10;
+				ret.push(addValue % 10);
+			}
+			else
+			{
+				cal = 0;
+				ret.push(addValue);
+			}
+		}
+
+		if (s.length() > t.length())
+		{
+			for (int i = 0; i < s.length() - min; i++)
+			{
+				int addValue = s[s.length() - (min + i) - 1] - '0' + cal;
+				if (addValue >= 10)
+				{
+					cal = addValue / 10;
+					ret.push(addValue % 10);
+				}
+				else
+				{
+					cal = 0;
+					ret.push(addValue);
+				}
+			}
 		}
 		else
 		{
-			cal = 0;
-			ret.push(addValue);
+			for (int i = 0; i < t.length() - min; i++)
+			{
+				int addValue = t[t.length() - (min + i) - 1] - '0' + cal;
+				if (addValue >= 10)
+				{
+					cal = addValue / 10;
+					ret.push(addValue % 10);
+				}
+				else
+				{
+					cal = 0;
+					ret.push(addValue);
+				}
+			}
 		}
+		if (cal != 0)
+		{
+			ret.push(cal);
+		}
+		string retStr;
+		while (!ret.empty())
+		{
+			retStr += to_string(ret.top());
+			ret.pop();
+		}
+		return retStr;
 	}
 
-	if (s.length() > t.length())
+	ListNode* ReverseList(ListNode* pHead)
 	{
-		for (int i = 0; i < s.length() - min; i++)
+		if (!pHead)
 		{
-			int addValue = s[s.length() - (min + i) - 1] - '0' + cal;
-			if (addValue >= 10)
-			{
-				cal = addValue / 10;
-				ret.push(addValue % 10);
-			}
-			else
-			{
-				cal = 0;
-				ret.push(addValue);
-			}
+			return pHead;
 		}
-	}
-	else
-	{
-		for (int i = 0; i < t.length() - min; i++)
+		ListNode* ret = nullptr;
+		while (pHead)
 		{
-			int addValue = t[t.length() - (min + i) - 1] - '0' + cal;
-			if (addValue >= 10)
-			{
-				cal = addValue / 10;
-				ret.push(addValue % 10);
-			}
-			else
-			{
-				cal = 0;
-				ret.push(addValue);
-			}
+			ListNode* tmpNode = pHead->next;
+			pHead->next = ret;
+			ret = pHead;
+			pHead = tmpNode;
 		}
+		return ret;
 	}
-	if (cal != 0)
-	{
-		ret.push(cal);
-	}
-	string retStr;
-	while (!ret.empty())
-	{
-		retStr += to_string(ret.top());
-		ret.pop();
-	}
-	return retStr;
 }

@@ -30,13 +30,27 @@ void test_middleNode()
 	middleNode(&p1);
 }
 
+void test_ReverseList()
+{
+	niuke::ListNode p1(1);
+	niuke::ListNode p2(2);
+	niuke::ListNode p3(3);
+	niuke::ListNode p4(4);
+	niuke::ListNode p5(5);
+	p1.next = &p2;
+	p2.next = &p3;
+	p3.next = &p4;
+	p4.next = &p5;
+	p5.next = nullptr;
+	niuke::ReverseList(&p1);
+}
+
 int main()
 {
 	// test_insertionSortList();
 	// test_middleNode();
 	// isAnagram("a", "ab");
 	// sortString("aaaabbbbcccc");
-	string ret = bigNumberAdd("11221239", "456354");
-	std::cout << ret << std::endl;
+	test_ReverseList();
 	system("pause");
 }
