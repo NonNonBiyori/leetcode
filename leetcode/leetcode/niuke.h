@@ -18,5 +18,8 @@ namespace niuke
 
 	// NC78 反转链表
 	ListNode* ReverseList(ListNode* pHead);
+
+	// NC50 链表中的节点每k个一组翻转
+	ListNode* reverseKGroup(ListNode* head, int k);
 }
 

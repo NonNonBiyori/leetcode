@@ -85,4 +85,59 @@ namespace niuke
 		}
 		return ret;
 	}
+
+	ListNode* reverseKGroup(ListNode* head, int k)
+	{
+		if (!head)
+		{
+			return head;
+		}
+		int nodeNum = 0;
+		ListNode* tmpNode = head;
+		while (tmpNode)
+		{
+			nodeNum++;
+			tmpNode = tmpNode->next;
+		}
+		int nCount = nodeNum / k;
+		if (nCount == 0)
+		{
+			return head;
+		}
+		int curNode = 0;
+		tmpNode = head;
+		ListNode* retNode = nullptr;
+		for (int i = 0; i < nCount; i++)
+		{
+			tmpNode = head;
+			ListNode* reverseNode = head;
+			for (int j = 0; j < k - 1; j++)
+			{
+				tmpNode = tmpNode->next;
+			}
+			head = tmpNode->next;
+			tmpNode->next = nullptr;
+			ListNode* rever = ReverseList(reverseNode);
+			if (!retNode)
+			{
+				retNode = rever;
+			}
+			else
+			{
+				ListNode* tmp = retNode;
+				while (tmp->next)
+				{
+					tmp = tmp->next;
+				}
+				tmp->next = rever;
+			}
+		}
+		ListNode* tmp = retNode;
+		while (tmp->next)
+		{
+			tmp = tmp->next;
+		}
+		tmp->next = head;
+		return retNode;
+	}
 }
