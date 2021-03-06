@@ -64,6 +64,28 @@ void test_reverseKGroup()
 	niuke::reverseKGroup(&p1,3);
 }
 
+void test_reConstructBinaryTree()
+{
+	vector<int> pre;
+	pre.push_back(1);
+	pre.push_back(2);
+	pre.push_back(3);
+	pre.push_back(4);
+	pre.push_back(5);
+	pre.push_back(6);
+	pre.push_back(7);
+	vector<int> vin;
+	vin.push_back(3);
+	vin.push_back(2);
+	vin.push_back(4);
+	vin.push_back(1);
+	vin.push_back(6);
+	vin.push_back(5);
+	vin.push_back(7);
+	niuke::reConstructBinaryTree(pre, vin);
+
+}
+
 int main()
 {
 	// test_insertionSortList();
@@ -71,6 +93,7 @@ int main()
 	// isAnagram("a", "ab");
 	// sortString("aaaabbbbcccc");
 	// test_ReverseList();
-	test_reverseKGroup();
+	// test_reverseKGroup();
+	test_reConstructBinaryTree();
 	system("pause");
 }

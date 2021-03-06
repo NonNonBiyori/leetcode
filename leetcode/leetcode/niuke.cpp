@@ -140,4 +140,41 @@ namespace niuke
 		tmp->next = head;
 		return retNode;
 	}
-}
+
+	TreeNode* reConstructBinaryTree(vector<int> pre, vector<int> vin)
+	{
+		TreeNode* retNode = new TreeNode(0);
+		if (pre.size() < 1 || vin.size() < 1)
+		{
+			return nullptr;
+		}
+
+		retNode->val = pre[0];
+		vector<int> right_pre;
+		vector<int> left_pre;
+		vector<int> right_vin;
+		vector<int> left_vin;
+		int pos = 0;
+		for (int i = 0; i < vin.size(); i++)
+		{
+			if (vin[i] == retNode->val)
+			{
+				break;
+			}
+			pos++;
+			right_pre.push_back(pre[i + 1]);
+			right_vin.push_back(vin[i]);
+		}
+
+		for (int i = pos+1; i < vin.size(); i++)
+		{
+			left_pre.push_back(pre[i]);
+			left_vin.push_back(vin[i]);
+		}
+		retNode->right = reConstructBinaryTree(right_pre, right_vin);
+		retNode->left = reConstructBinaryTree(left_pre, left_vin);
+		return retNode;
+	}
+
+
+} // namespace
