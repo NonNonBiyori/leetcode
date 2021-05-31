@@ -1,5 +1,9 @@
 #include "niuke.h"
 
+#include <deque>
+#include <stack>
+#include <set>
+
 namespace niuke
 {
 	string bigNumberAdd(string s, string t)
@@ -174,6 +178,75 @@ namespace niuke
 		retNode->right = reConstructBinaryTree(right_pre, right_vin);
 		retNode->left = reConstructBinaryTree(left_pre, left_vin);
 		return retNode;
+	}
+
+	bool hasCycle(ListNode *head)
+	{
+		if (!head)
+		{
+			return false;
+		}
+
+		ListNode* quick = head;
+		ListNode* slow = head;
+		while (quick != nullptr && quick->next != nullptr)
+		{
+			slow = slow->next;
+			quick = quick->next->next;
+			if (quick == slow)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool isSymmetric(TreeNode* root)
+	{
+		if (root == nullptr)
+		{
+			return true;
+		}
+		set<TreeNode*> hasDeal;
+		vector<int> retVec;
+		stack<TreeNode*> nodeDeq;
+		nodeDeq.push(root);
+		while (!nodeDeq.empty())
+		{
+			TreeNode* tmpNode = nodeDeq.top();
+			if (tmpNode->left != nullptr && 
+				hasDeal.find(tmpNode->left) == hasDeal.end())
+			{
+				nodeDeq.push(tmpNode->left);
+			} 
+			else
+			{
+				hasDeal.insert(tmpNode);
+				nodeDeq.pop();
+				retVec.push_back(tmpNode->val);
+				if (tmpNode->right != nullptr)
+				{
+					nodeDeq.push(tmpNode->right);
+				}
+				else if (tmpNode->left != nullptr)
+				{
+					retVec.push_back(-99999);
+				}
+			}
+		}
+
+		if (retVec.size() == 1)
+		{
+			return true;
+		}
+		for (int i = 0; i < retVec.size() / 2; i++)
+		{
+			if (retVec[i] != retVec[retVec.size() - i - 1])
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 

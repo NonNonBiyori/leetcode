@@ -24,7 +24,7 @@ ListNode* middleNode(ListNode* head);
 bool isAnagram(string s, string t);
 
 // 4. 寻找两个正序数组的中位数
-double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2);
+double findMedianSortedArrays(vector<int>& nums1, vector<int>&   nums2);
 
 // 1370. 上升下降字符串
 string sortString(string s);

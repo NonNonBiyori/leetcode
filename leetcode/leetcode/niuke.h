@@ -31,5 +31,13 @@ namespace niuke
 
 	// NC12 重建二叉树
 	TreeNode* reConstructBinaryTree(vector<int> pre, vector<int> vin);
+
+	// NC3 链表中环的入口节点
+	ListNode *detectCycle(ListNode *head);
+	// NC4 判断链表中是否有环
+	bool hasCycle(ListNode *head);
+
+	// NC16 判断二叉树是否对称
+	bool isSymmetric(TreeNode* root);
 }
 
