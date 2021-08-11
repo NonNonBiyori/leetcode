@@ -39,5 +39,8 @@ namespace niuke
 
 	// NC16 判断二叉树是否对称
 	bool isSymmetric(TreeNode* root);
+
+	// NC22 合并两个有序的数组
+	void merge(int A[], int m, int B[], int n);
 }
 

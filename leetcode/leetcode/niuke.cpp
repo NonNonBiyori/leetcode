@@ -249,5 +249,31 @@ namespace niuke
 		return true;
 	}
 
+	void merge(int A[], int m, int B[], int n)
+	{
+		int posA = m - 1;
+		int posB = n - 1;
+		int index = m + n - 1;
+		while (posA >= 0 && posB >= 0)
+		{
+			if (A[posA] > B[posB])
+			{
+				A[index] = A[posA];
+				posA--;
+			}
+			else
+			{
+				A[index] = B[posB];
+				posB--;
+			}
+			index--;
+		}
+		while (posB >= 0)
+		{
+			A[index] = B[posB];
+			index--;
+			posB--;
+		}
+	}
 
 } // namespace
